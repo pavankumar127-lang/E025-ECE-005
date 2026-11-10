@@ -1,0 +1,4 @@
+account_id,period_start,period_end,packs_bought,pack_cost_rs,pool_mb_used,overage_mb,overage_charge_rs,subtotal_rs,gst_rs,total_rs
+ACC-01,2026-10-01,2026-11-14,2,598.0,409.6,1140.5,115.6,713.6,128,842
+ACC-02,2026-10-01,2026-11-14,2,4998.0,25932.5,0.0,0.0,4998.0,900,5898
+ACC-03,2026-10-01,2026-11-14,2,4998.0,14043.1,197.5,10.05,5008.05,901,5909
