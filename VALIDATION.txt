@@ -1,0 +1,58 @@
+ECE-005 code validation
+Python compilation: passed for main.py, models.py, engine.py, test_engine.py
+Unit tests exit code: 0
+
+SIM registered successfully!
+SIM activated successfully!
+Data pack purchased successfully!
+SIM activated successfully!
+Data pack purchased successfully!
+SIM activated successfully!
+Data pack purchased successfully!
+SIM activated successfully!
+SIM activated successfully!
+SIM activated successfully!
+Data pack purchased successfully!
+Statement generated for ACC-01!
+SIM activated successfully!
+Data pack purchased successfully!
+SIM suspended successfully!
+SIM resumed successfully!
+Account registered successfully!
+Account registered successfully!
+Data pack type created successfully!
+Data pack purchased successfully!
+Data pack type created successfully!
+Account registered successfully!
+SIM registered successfully!
+Account registered successfully!
+SIM registered successfully!
+SIM suspended successfully!
+SIM resumed successfully!
+
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
+test_fair_use_and_overage (test_engine.TestEngine.test_fair_use_and_overage) ... ok
+test_pack_purchase_and_validity (test_engine.TestEngine.test_pack_purchase_and_validity) ... ok
+test_shared_data_pool (test_engine.TestEngine.test_shared_data_pool) ... ok
+test_sim_registration (test_engine.TestEngine.test_sim_registration) ... ok
+test_statement_and_gst (test_engine.TestEngine.test_statement_and_gst) ... ok
+test_suspension_and_resumption (test_engine.TestEngine.test_suspension_and_resumption) ... ok
+test_account_registration (test_engine.TestModels.test_account_registration) ... ok
+test_pack_purchase (test_engine.TestModels.test_pack_purchase) ... ok
+test_pack_type_creation (test_engine.TestModels.test_pack_type_creation) ... ok
+test_sim_registration (test_engine.TestModels.test_sim_registration) ... ok
+test_sim_suspension_and_resumption (test_engine.TestModels.test_sim_suspension_and_resumption) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.001s
+
+OK

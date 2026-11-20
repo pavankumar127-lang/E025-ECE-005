@@ -1,0 +1,3 @@
+pack_type,data_mb,validity_days,price_rs,overage_rate_per_mb
+PK-S,1024,30,299.00,0.10
+PK-L,20480,30,2499.00,0.05

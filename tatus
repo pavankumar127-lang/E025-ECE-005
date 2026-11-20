@@ -1,0 +1,115 @@
+warning: in the working copy of 'engine.py', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/engine.py b/engine.py[m
+[1mindex 21eb2bc..416e794 100644[m
+[1m--- a/engine.py[m
+[1m+++ b/engine.py[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-﻿[m
+[32m+[m
+ from datetime import datetime, timedelta[m
+ import csv[m
+ import math[m
+[36m@@ -356,6 +356,10 @@[m [mclass PooledDataEngine:[m
+             self.add_error(source, line_no, "SIM_SUSPENDED")[m
+             return[m
+ [m
+[32m+[m[32m        if sim["state"] == "EXPIRED":[m
+[32m+[m[32m            self.add_error(source, line_no, "EXPIRED")[m
+[32m+[m[32m            return[m
+[32m+[m
+         if sim["state"] != "ACTIVE":[m
+             self.add_error(source, line_no, "NOT_ACTIVE")[m
+             return[m
+[36m@@ -604,58 +608,51 @@[m [mclass PooledDataEngine:[m
+         [m
+     [m
+     def update_sim_states_for_date(self, process_date):[m
+[31m-     for iccid, sim in self.sims.items():[m
+[31m-        account_id = sim["account_id"][m
+[32m+[m[32m        for iccid, sim in self.sims.items():[m
+[32m+[m[32m            account_id = sim["account_id"][m
+ [m
+[31m-        if sim["state"] in ["REGISTERED", "DEACTIVATED", "SUSPENDED"]:[m
+[31m-            continue[m
+[32m+[m[32m            if sim["state"] in ["REGISTERED", "DEACTIVATED", "SUSPENDED"]:[m
+[32m+[m[32m                continue[m
+ [m
+[31m-        valid_packs = self.get_valid_packs([m
+[31m-            account_id, process_date[m
+[31m-        )[m
+[32m+[m[32m            valid_packs = self.get_valid_packs(account_id, process_date)[m
+ [m
+[31m-        # ACTIVE SIMs expire only when no valid pack exists[m
+[31m-        if sim["state"] == "ACTIVE":[m
+[31m-            if valid_packs:[m
+[31m-                continue[m
+[32m+[m[32m            # ACTIVE SIMs expire only when no valid pack exists.[m
+[32m+[m[32m            if sim["state"] == "ACTIVE":[m
+[32m+[m[32m                if valid_packs:[m
+[32m+[m[32m                    continue[m
+ [m
+[31m-            expired_packs = [[m
+[31m-                pack for pack in self.purchased_packs[m
+[31m-                if pack["account_id"] == account_id[m
+[31m-                and pack["expiry_date"] < process_date[m
+[31m-            ][m
+[32m+[m[32m                expired_packs = [[m
+[32m+[m[32m                    pack for pack in self.purchased_packs[m
+[32m+[m[32m                    if pack["account_id"] == account_id[m
+[32m+[m[32m                    and pack["expiry_date"] < process_date[m
+[32m+[m[32m                ][m
+ [m
+[31m-            if not expired_packs:[m
+[31m-                continue[m
+[32m+[m[32m                if not expired_packs:[m
+[32m+[m[32m                    continue[m
+ [m
+[31m-            latest_expiry = max([m
+[31m-                pack["expiry_date"] for pack in expired_packs[m
+[31m-            )[m
+[32m+[m[32m                latest_expiry = max([m
+[32m+[m[32m                    pack["expiry_date"] for pack in expired_packs[m
+[32m+[m[32m                )[m
+ [m
+[31m-            sim["state"] = "EXPIRED"[m
+[31m-            sim["state_since"] = process_date[m
+[31m-            sim["expired_on"] = latest_expiry[m
+[32m+[m[32m                sim["state"] = "EXPIRED"[m
+[32m+[m[32m                sim["state_since"] = process_date[m
+[32m+[m[32m                sim["expired_on"] = latest_expiry[m
+ [m
+[31m-        # EXPIRED SIMs must be deactivated after 7 days,[m
+[31m-        # even if the account purchases a new pack[m
+[31m-        elif sim["state"] == "EXPIRED":[m
+[31m-            expired_on = sim.get("expired_on")[m
+[32m+[m[32m            # Deactivate after the seven-day grace period.[m
+[32m+[m[32m            elif sim["state"] == "EXPIRED":[m
+[32m+[m[32m                expired_on = sim.get("expired_on")[m
+ [m
+[31m-            if not expired_on:[m
+[31m-                continue[m
+[32m+[m[32m                if not expired_on:[m
+[32m+[m[32m                    continue[m
+ [m
+[31m-            days_after_expiry = ([m
+[31m-                datetime.strptime([m
+[31m-                    process_date, "%Y-%m-%d"[m
+[31m-                ).date()[m
+[31m-                - datetime.strptime([m
+[31m-                    expired_on, "%Y-%m-%d"[m
+[31m-                ).date()[m
+[31m-            ).days[m
+[32m+[m[32m                days_after_expiry = ([m
+[32m+[m[32m                    datetime.strptime(process_date, "%Y-%m-%d").date()[m
+[32m+[m[32m                    - datetime.strptime(expired_on, "%Y-%m-%d").date()[m
+[32m+[m[32m                ).days[m
+ [m
+[31m-            if days_after_expiry > 7:[m
+[31m-                sim["state"] = "DEACTIVATED"[m
+[31m-                sim["state_since"] = process_date[m
+[32m+[m[32m                if days_after_expiry > 7:[m
+[32m+[m[32m                    sim["state"] = "DEACTIVATED"[m
+[32m+[m[32m                    sim["state_since"] = process_date[m
+ [m
+     def process_day(self, process_date):[m
+         # Record pool balance before usage[m
